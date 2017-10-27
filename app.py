@@ -7,15 +7,14 @@ This file creates your application.
 """
 
 import os
+import json
+
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
-
-import json
 CORS(app)
 
 
@@ -28,7 +27,7 @@ def get():
 @app.route('/post/', methods=['GET','POST'])
 def post():
     content = request.get_json()
-    data = dict()
+    data = {}
     data['temp'] = content.get('Temperature')
     data['humidity'] = content.get('Humidity')
     data['moisture'] = content.get('Soil Moisture')
